@@ -15,7 +15,7 @@ pipeline{
                 }
                 stage('Integreation tests'){
                     when {
-                        expression{param.RUN_INTEGRATION_TESTS==true}
+                        expression{params.RUN_INTEGRATION_TESTS==true}
                     }
                     steps{
                         dir("${env.WORKSPACE}/shopping-cart-v2/"){
