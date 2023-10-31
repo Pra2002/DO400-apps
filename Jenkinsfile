@@ -7,13 +7,17 @@ pipeline{
         stage("Test"){
             parallel{
                 stage('Unit test'){
-                        sh './mvnw test -D testGroups=unit'
+                    steps{
+                         sh './mvnw test -D testGroups=unit'
+                    }
                 }
                 stage('Integreation tests'){
                     when {
                         expression(param.RUN_INTEGRATION_TESTS==true)
                     }
+                    steps{
                        sh './mvnw test -D testGroups=integration'
+                    }
                 }
             }
             }
