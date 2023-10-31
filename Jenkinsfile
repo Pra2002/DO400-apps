@@ -8,7 +8,7 @@ pipeline{
             parallel{
                 stage('Unit test'){
                     steps{
-                         sh './mvnw test -D testGroups=unit'
+                         sh './shopping-cart-v2/mvnw test -D testGroups=unit'
                     }
                 }
                 stage('Integreation tests'){
@@ -16,7 +16,7 @@ pipeline{
                         expression{param.RUN_INTEGRATION_TESTS==true}
                     }
                     steps{
-                       sh './mvnw test -D testGroups=integration'
+                       sh './shopping-cart-v2/mvnw test -D testGroups=integration'
                     }
                 }
             }
