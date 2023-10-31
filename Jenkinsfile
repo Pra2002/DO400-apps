@@ -8,7 +8,9 @@ pipeline{
             parallel{
                 stage('Unit test'){
                     steps{
-                         sh './shopping-cart-v2/mvnw test -D testGroups=unit'
+                        dir("${env.WORKSPACE}/shopping-cart-v2/"){
+                            sh './mvnw test -D testGroups=unit'
+                        }
                     }
                 }
                 stage('Integreation tests'){
@@ -16,7 +18,9 @@ pipeline{
                         expression{param.RUN_INTEGRATION_TESTS==true}
                     }
                     steps{
-                       sh './shopping-cart-v2/mvnw test -D testGroups=integration'
+                        dir("${env.WORKSPACE}/shopping-cart-v2/"){
+                       sh './mvnw test -D testGroups=integration'
+                        }
                     }
                 }
             }
