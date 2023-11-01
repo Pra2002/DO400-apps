@@ -9,7 +9,7 @@ pipeline{
                 stage('Unit test'){
                     steps{
                         dir("${env.WORKSPACE}/shopping-cart-v2/"){
-                            sh './mvnw test -D testGroups=unit'
+                            sh "./mvnw test -D testGroups=unit"
                         }
                     }
                 }
@@ -18,7 +18,7 @@ pipeline{
                         script{
                             try {
                              dir("${env.WORKSPACE}/shopping-cart-v2/"){
-                                 sh './mvnw package -D skipTests '
+                                 sh "./mvnw package -D skipTests" 
                         }
                         catch (exception) {
                             echo " Error while generating JAR file"
@@ -33,7 +33,7 @@ pipeline{
                     }
                     steps{
                         dir("${env.WORKSPACE}/shopping-cart-v2/"){
-                       sh './mvnw test -D testGroups=integration'
+                       sh "./mvnw test -D testGroups=integration"
                         }
                     }
                 }
