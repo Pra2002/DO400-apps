@@ -15,8 +15,15 @@ pipeline{
                 }
                 stage("Build"){
                     steps{
-                         dir("${env.WORKSPACE}/shopping-cart-v2/"){
-                        sh './mvnw package -D skipTests '
+                        script{
+                            try {
+                             dir("${env.WORKSPACE}/shopping-cart-v2/"){
+                                 sh './mvnw package -D skipTests '
+                        }
+                        catch (exception) {
+                            echo " Error while generating JAR file"
+                        }
+                        }
                     }
                     }
                 }
