@@ -13,32 +13,32 @@ pipeline{
                         }
                     }
                 }
-                stage("Build"){
-                    steps{
-                        script{
-                            try {
-                             dir("${env.WORKSPACE}/shopping-cart-v2/"){
-                                 sh "./mvnw package -D skipTests" 
-                        }
-                        catch (exception) {
-                            echo " Error while generating JAR file"
-                        }
-                        }
-                    }
-                    }
-                }
                 stage('Integreation tests'){
                     when {
                         expression{params.RUN_INTEGRATION_TESTS==true}
                     }
                     steps{
                         dir("${env.WORKSPACE}/shopping-cart-v2/"){
-                       sh "./mvnw test -D testGroups=integration"
+                             sh "./mvnw test -D testGroups=integration"
                         }
                     }
                 }
             }
             }
+             stage("Build"){
+                    steps{
+                        script{
+                            try {
+                             dir("${env.WORKSPACE}/shopping-cart-v2/"){
+                                 sh "./mvnw package -D skipTests" 
+                                     }
+                            }
+                        catch (exception) {
+                            echo " Error while generating JAR file"
+                                }
+                    }
+                }
+            }
+          }
 
-        }
-}
+   }
