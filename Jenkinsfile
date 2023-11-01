@@ -14,8 +14,10 @@ pipeline{
                     }
                 }
                 stage("Build"){
-                    dir("${env.WORKSPACE}/shopping-cart-v2/"){
+                    steps{
+                         dir("${env.WORKSPACE}/shopping-cart-v2/"){
                         sh './mvnw package -D skipTests '
+                    }
                     }
                 }
                 stage('Integreation tests'){
